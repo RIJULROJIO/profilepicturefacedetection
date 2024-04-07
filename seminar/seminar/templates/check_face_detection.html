@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Face Detection</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .profile-container {
+            text-align: center;
+            margin-top: 20px;
+            border: 2px solid #00796B;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-image {
+            max-width: 200px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px auto;
+            display: block;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: #00796B;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 0 10px;
+        }
+
+        .btn:hover {
+            background-color: #005550;
+        }
+    </style>
+</head>
+<body>
+    <h3>Face Detection Result:</h3>
+    {% if messages %}
+        <p class="error-message">
+            {% for message in messages %}
+                {{ message|safe }}<br>
+            {% endfor %}
+        </p>
+    {% endif %}
+
+    {% if uploaded_file_url or captured_photo_url %}
+        <div class="profile-container">
+            {% if uploaded_file_url %}
+                <img class="profile-image" src="{{ uploaded_file_url }}" alt="Uploaded Profile Picture">
+            {% elif captured_photo_url %}
+                <img class="profile-image" src="{{ captured_photo_url }}" alt="Captured Profile Picture">
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <!-- Button to go back to upload page -->
+    <div class="btn-container">
+        <a href="{% url 'upload_profile_picture' %}" class="btn">Upload Another Photo</a>
+    </div>
+</body>
+</html>
